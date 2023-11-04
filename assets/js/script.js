@@ -39,8 +39,8 @@ function runGame(gameType) {
 }
 
 /**
- * Checks the answer against the first element in the 
- * returned calculateCorrectAnswer array.
+ * Checks the answer against the first element in
+ * the returned calculateCorrectAnswer array
  */
 function checkAnswer() {
 
@@ -49,16 +49,20 @@ function checkAnswer() {
     let isCorrect = userAnswer === calculatedAnswer[0];
 
     if (isCorrect) {
-        alert ("Hey you got it right! Well Done! ;D ");
+        alert("Hey! You got it right! :D");
+        incrementScore();
     } else {
-        alert (`Unlucky! you answered ${userAnswer}. The correct answer is ${calculatedAnswer[0]}!`);
+        alert(`Awwww.... you answered ${userAnswer}. The correct answer was ${calculatedAnswer[0]}!`);
+        incrementWrongAnswer();
     }
+
+    runGame(calculatedAnswer[1]);
 
 }
 
-/** 
- * Gets the operands (the numbers) and the operator (plus, minus, times, divide)
- * directly from the DOM, and returns the correct answer.
+/**
+ * Gets the operands (the numbers) and the operator (plus, minus etc)
+ * directly from the dom, and returns the correct answer.
  */
 function calculateCorrectAnswer() {
 
@@ -69,17 +73,29 @@ function calculateCorrectAnswer() {
     if (operator === "+") {
         return [operand1 + operand2, "addition"];
     } else {
-        alert(`Unimplemented operator: ${operator}`);
-        throw `Unimplemented operator: ${operator}. Aborting!`;
+        alert(`Unimplemented operator ${operator}`);
+        throw `Unimplemented operator ${operator}. Aborting!`;
     }
 
 }
 
+/**
+ * Gets the current score from the DOM and increments it by 1
+ */
 function incrementScore() {
+
+    let oldScore = parseInt(document.getElementById("score").innerText);
+    document.getElementById("score").innerText = ++oldScore;
 
 }
 
+/**
+ * Gets the current tally of incorrect answers from the DOM and increments it by 1
+ */
 function incrementWrongAnswer() {
+
+    let oldScore = parseInt(document.getElementById("incorrect").innerText);
+    document.getElementById("incorrect").innerText = ++oldScore;
 
 }
 
